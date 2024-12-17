@@ -24,7 +24,7 @@ public class UtenteServiceImpl implements UtenteService {
 
     public Utente recuperaByEmailePassword(String email, String password) {
 
-        Optional<Utente> u = utenteRepo.findByEmailPassword(email, password);
+        Optional<Utente> u = utenteRepo.findByEmailePassword(email, password);
 
         return u.isEmpty() ? null : u.get();
     }
