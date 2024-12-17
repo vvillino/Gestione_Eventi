@@ -10,8 +10,8 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrizione</th>
+                <th>Categoria</th>
                 <th>Data</th>
-                <th>Organizzatore</th>
                 <th>Partecipanti</th>
                 <th>Azioni</th>
             </tr>
@@ -20,19 +20,10 @@
             <tr th:each="evento : ${eventi}">
                 <td th:text="${evento.nome}"></td>
                 <td th:text="${evento.descrizione}"></td>
-                <td th:text="${evento.dataEvento}"></td>
-                <td th:text="${evento.organizzatore.nome}"></td>
-                <td>
-                    <ul>
-                        <li th:each="partecipante : ${evento.partecipanti}" th:text="${partecipante.nome}"></li>
-                    </ul>
-                </td>
-                <td>
-                    <a th:href="@{/eventi/partecipazione/{eventoId}/{utenteId}(eventoId=${evento.id}, utenteId=1)}">Partecipa</a>
-                </td>
+                <td th:text="${evento.categoria}"></td>
+                <td th:text="${evento.data}"></td>
             </tr>
         </tbody>
     </table>
-    <a href="/eventi/crea">Crea Evento</a>
 </body>
 </html>
