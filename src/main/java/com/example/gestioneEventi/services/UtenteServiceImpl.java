@@ -1,5 +1,6 @@
 package com.example.gestioneEventi.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,12 @@ public class UtenteServiceImpl implements UtenteService {
     @Override
     public void elimina(Long id) {
         utenteRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Utente> recuperaByEvento(Long id) {
+
+        return utenteRepo.findAllByEvento(id);
     }
 
 }
