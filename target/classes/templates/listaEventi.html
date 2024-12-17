@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista Eventi</title>
+</head>
+<body>
+    <h1>Eventi</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Data</th>
+                <th>Organizzatore</th>
+                <th>Partecipanti</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="evento : ${eventi}">
+                <td th:text="${evento.nome}"></td>
+                <td th:text="${evento.descrizione}"></td>
+                <td th:text="${evento.dataEvento}"></td>
+                <td th:text="${evento.organizzatore.nome}"></td>
+                <td>
+                    <ul>
+                        <li th:each="partecipante : ${evento.partecipanti}" th:text="${partecipante.nome}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <a th:href="@{/eventi/partecipazione/{eventoId}/{utenteId}(eventoId=${evento.id}, utenteId=1)}">Partecipa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/eventi/crea">Crea Evento</a>
+</body>
+</html>

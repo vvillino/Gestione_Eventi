@@ -13,8 +13,8 @@ import com.example.gestioneEventi.model.Utente;
 @Repository
 public interface UtenteRepository extends JpaRepository<Utente, Long> {
 
-    // SELECT * FROM Utente U WHERE U.email = email AND U.password = password
-    public Optional<Utente> findByEmailPassword(String email, String password);
+    @Query(nativeQuery = true, value = "SELECT * FROM Utente U WHERE U.email = :email AND U.password = :password")
+    public Optional<Utente> findByEmailePassword(@Param("email") String email, @Param("password") String password);
 
     @Query(nativeQuery = true, value = "SELECT U.nome, U.cognome FROM Utenti u JOIN Partecipanti p ON u.id_utente = p.id_Utente WHERE P.id_evento = :id_evento")
     public List<Utente> findAllByEvento(@Param("id_evento") Long id);
