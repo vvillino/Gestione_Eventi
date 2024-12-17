@@ -1,6 +1,7 @@
 package com.example.gestioneEventi.services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +53,15 @@ public class EventoServiceImpl implements EventoService {
 
     public List<Evento> recuperaEventiByCategoria(String categoria) {
 
-        return eventoRepo.findByCategoria(categoria);
+        List<Evento> eventi = new ArrayList<>();
+
+        for (Evento e : eventoRepo.findAll()) {
+
+            if (e.getCategoria().equalsIgnoreCase(categoria))
+                eventi.add(e);
+        }
+
+        return eventi;
     }
 
     public List<Evento> recuperaEventiByData(LocalDate data) {
