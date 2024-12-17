@@ -53,15 +53,7 @@ public class EventoServiceImpl implements EventoService {
 
     public List<Evento> recuperaEventiByCategoria(String categoria) {
 
-        List<Evento> eventi = new ArrayList<>();
-
-        for (Evento e : eventoRepo.findAll()) {
-
-            if (e.getCategoria().equalsIgnoreCase(categoria))
-                eventi.add(e);
-        }
-
-        return eventi;
+        return eventoRepo.findByCategoria(categoria);
     }
 
     public List<Evento> recuperaEventiByData(LocalDate data) {
