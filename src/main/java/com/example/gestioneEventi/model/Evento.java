@@ -1,4 +1,4 @@
-package com.example.gestioneEventi.gestioneEventi.model;
+package com.example.gestioneEventi.model;
 
 import java.time.LocalDate;
 import java.util.List;

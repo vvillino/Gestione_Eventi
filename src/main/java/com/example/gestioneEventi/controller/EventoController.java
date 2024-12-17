@@ -1,4 +1,4 @@
-package com.example.gestioneEventi.gestioneEventi.controller;
+package com.example.gestioneEventi.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

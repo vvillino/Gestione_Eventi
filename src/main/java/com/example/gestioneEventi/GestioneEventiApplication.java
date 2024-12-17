@@ -1,4 +1,4 @@
-package com.example.gestioneEventi.gestioneEventi;
+package com.example.gestioneEventi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
