@@ -27,12 +27,14 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
+    // http://localhost:8080/gestione_eventi/eventi
     @GetMapping
     public List<Evento> getAllEvents() {
 
         return eventoService.recuperaTutti();
     }
 
+    // http://localhost:8080/gestione_eventi/eventi/1
     @GetMapping("/{id}")
     public ResponseEntity<Evento> getEventiById(@PathVariable Long id) {
 
@@ -44,7 +46,8 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("/{categoria}")
+    // http://localhost:8080/gestione_eventi/eventi/categoria/sport
+    @GetMapping("/categoria/{categoria}")
     public ResponseEntity<List<Evento>> getEventiByCategoria(@PathVariable String categoria) {
 
         List<Evento> eventi = eventoService.recuperaEventiByCategoria(categoria);
@@ -52,10 +55,11 @@ public class EventoController {
         if (eventi != null)
             return ResponseEntity.status(HttpStatus.OK).body(eventi);
         else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
     }
 
-    @GetMapping("/{data}")
+    // http://localhost:8080/gestione_eventi/eventi/data/2024-03-10
+    @GetMapping("/data/{data}")
     public ResponseEntity<List<Evento>> getEventiByData(@PathVariable LocalDate data) {
 
         List<Evento> eventi = eventoService.recuperaEventiByData(data);
@@ -63,9 +67,10 @@ public class EventoController {
         if (eventi != null)
             return ResponseEntity.status(HttpStatus.OK).body(eventi);
         else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
     }
 
+    // http://localhost:8080/gestione_eventi/eventi/crea
     @PostMapping("/crea")
     public ResponseEntity<Evento> creaEvento(@RequestBody @Valid Evento evento) {
 
@@ -75,6 +80,7 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
+    // http://localhost:8080/gestione_eventi/eventi/8
     @PutMapping("/{id}")
     public ResponseEntity<Evento> modificaEvento(@PathVariable Long id, @RequestBody @Valid Evento evento) {
 
@@ -82,12 +88,14 @@ public class EventoController {
 
         if (eventoTrovato != null) {
 
+            evento.setId(eventoTrovato.getId());
             eventoService.salva(evento);
             return ResponseEntity.status(HttpStatus.OK).body(evento);
         } else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    // http://localhost:8080/gestione_eventi/eventi/8
     @DeleteMapping("/{id}")
     public ResponseEntity<Evento> elimina(@PathVariable Long id) {
 

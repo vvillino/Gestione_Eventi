@@ -3,6 +3,8 @@ package com.example.gestioneEventi.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,9 @@ public class Evento {
     private String descrizione;
     @Column(name = "categoria")
     private String categoria;
+
     @Column(name = "data")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
 
     @ManyToMany
@@ -46,6 +50,10 @@ public class Evento {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
