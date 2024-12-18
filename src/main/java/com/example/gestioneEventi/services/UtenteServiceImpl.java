@@ -22,13 +22,6 @@ public class UtenteServiceImpl implements UtenteService {
         return u.isEmpty() ? null : u.get();
     }
 
-    public Utente recuperaByEmailePassword(String email, String password) {
-
-        Optional<Utente> u = utenteRepo.findByEmailePassword(email, password);
-
-        return u.isEmpty() ? null : u.get();
-    }
-
     @Override
     public Boolean salva(Utente utente) {
         boolean esito = true;

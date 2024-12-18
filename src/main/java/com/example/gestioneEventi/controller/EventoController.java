@@ -29,7 +29,7 @@ public class EventoController {
 
     // http://localhost:8080/gestione_eventi/eventi
     @GetMapping
-    public List<Evento> getAllEvents() {
+    public List<Evento> getEventi() {
 
         return eventoService.recuperaTutti();
     }

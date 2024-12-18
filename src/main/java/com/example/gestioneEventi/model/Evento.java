@@ -3,8 +3,11 @@ package com.example.gestioneEventi.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

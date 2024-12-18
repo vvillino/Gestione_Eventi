@@ -10,18 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.gestioneEventi.model.Utente;
-import com.example.gestioneEventi.services.UtenteServiceImpl;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.gestioneEventi.model.Evento;
+import com.example.gestioneEventi.model.Utente;
+import com.example.gestioneEventi.services.UtenteService;
 
 @RestController
 @RequestMapping("/utenti")
 public class UtenteController {
-    
-    @Autowired
-    private UtenteServiceImpl service;
 
+    @Autowired
+    private UtenteService service;
+
+    // http://localhost:8080/gestione_eventi/utenti/1
     @GetMapping("/{id}")
     public ResponseEntity<Utente> getUser(@PathVariable Long id) {
 
@@ -32,20 +33,15 @@ public class UtenteController {
         }
     }
 
-    @GetMapping("/.....")
-    public ResponseEntity<List<Utente>> getMethodName(@RequestParam String param) {
-        // TODO ....
-    }
-    
-
+    // http://localhost:8080/gestione_eventi/utenti/1
     @DeleteMapping("/{id}")
-    public ResponseEntity<Utente> deleteUser(@PathVariable Long id) {
-        
+    public ResponseEntity<Utente> elimina(@PathVariable Long id) {
+
         Utente u = service.recuperaUno(id);
 
         if (u != null) {
             service.elimina(id);
-            return ResponseEntity.status(HttpStatus.OK).body(u);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
