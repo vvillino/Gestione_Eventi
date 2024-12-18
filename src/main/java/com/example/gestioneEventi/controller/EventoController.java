@@ -1,39 +1,52 @@
 package com.example.gestioneEventi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.gestioneEventi.services.EventoServiceImpl;
+import com.example.gestioneEventi.model.Evento;
+import com.example.gestioneEventi.services.EventoService;
 
-@Controller
+@RestController
+@RequestMapping("/eventi")
 public class EventoController {
 
     @Autowired
-    private EventoServiceImpl eventoService;
+    private EventoService eventoService;
 
-    @GetMapping("/")
-    public String homepage() {
+    @GetMapping
+    public List<Evento> getAllEvents() {
 
-        return "evento";
+        return eventoService.recuperaTutti();
     }
 
-    @GetMapping("/eventi")
-    public String getAllEvents(Model model) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Evento> getEventiById(@PathVariable Long id) {
 
-        model.addAttribute("eventi", eventoService.recuperaTutti());
+        Evento evento = eventoService.recuperaUno(id);
 
-        return "listaEventi";
+        if (evento != null)
+            return ResponseEntity.ok(evento);
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{categoria}")
-    public String getEventiCategoria(@PathVariable String categoria, Model model) {
+    public ResponseEntity<Evento> getEventiByCategoria(@PathVariable String categoria) {
 
-        model.addAttribute("eventi", eventoService.recuperaEventiByCategoria(categoria));
+        Evento evento = eventoService.recuperaEventiByCategoria(categoria);
 
-        return "listaEventi";
+        if (evento != null)
+            return ResponseEntity.ok(evento);
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 }
