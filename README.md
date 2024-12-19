@@ -6,7 +6,7 @@
 
 L'applicazione "Gestione degli Eventi" permette agli utenti di creare, visualizzare, modificare e cancellare eventi. 
 Gli utenti possono anche registrarsi per partecipare agli eventi. 
-Sviluppiamo il progetto usando Spring Boot, con Spring MVC per la gestione delle richieste HTTP, Spring Data JPA per l'accesso ai dati del database relazionale nell'applicazione Java, Thymeleaf per la parte di visualizzazione (Front-End), e MySQL Workbench come database per memorizzare i dati relativi agli eventi e agli utenti.
+Sviluppiamo il progetto usando Spring Boot, con Spring MVC e Postman per la gestione delle richieste HTTP, Spring Data JPA per l'accesso ai dati del database relazionale nell'applicazione Java e MySQL Workbench come database per memorizzare i dati relativi agli eventi e agli utenti.
 
 
 *
