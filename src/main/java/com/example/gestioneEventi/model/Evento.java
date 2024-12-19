@@ -3,11 +3,8 @@ package com.example.gestioneEventi.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.annotations.Cascade;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +33,7 @@ public class Evento {
     private LocalDate data;
 
     @ManyToMany
-    @JoinTable(name = "partecipanti", joinColumns = @JoinColumn(name = "id_evento", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_utente", referencedColumnName = "id"))
+    @JoinTable(name = "partecipanti", joinColumns = @JoinColumn(name = "id_evento", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_utente", referencedColumnName = "id", nullable = true))
     private List<Utente> utenti;
 
     public Evento() {
@@ -95,6 +92,10 @@ public class Evento {
     public String toString() {
         return "Evento [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", categoria=" + categoria
                 + ", data=" + data + "]";
+    }
+
+    public List<Utente> getUtenti() {
+        return utenti;
     }
 
 }

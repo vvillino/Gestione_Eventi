@@ -6,14 +6,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.gestioneEventi.model.Evento;
 import com.example.gestioneEventi.model.Utente;
+import com.example.gestioneEventi.repositories.EventoRepository;
 import com.example.gestioneEventi.repositories.UtenteRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
 
     @Autowired
     private UtenteRepository utenteRepo;
+
+    @Autowired
+    private EventoRepository eventoRepo;
 
     @Override
     public Utente recuperaUno(long id) {
@@ -35,9 +42,24 @@ public class UtenteServiceImpl implements UtenteService {
         return esito;
     }
 
-    @Override
-    public void elimina(Long id) {
-        utenteRepo.deleteById(id);
+    // @Override
+    // public void elimina(Long id) {
+    // utenteRepo.deleteById(id);
+    // }
+
+    public void elimina(Long userId) {
+
+        Utente utente = utenteRepo.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato"));
+
+        for (Evento evento : utente.getEventi()) {
+
+            evento.getUtenti().remove(utente);
+            eventoRepo.save(evento);
+        }
+
+        // Elimina l'utente
+        utenteRepo.delete(utente);
     }
 
     @Override

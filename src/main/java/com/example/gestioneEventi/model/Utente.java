@@ -2,7 +2,6 @@ package com.example.gestioneEventi.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Utente {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(mappedBy = "utenti", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "utenti")
     private List<Evento> eventi;
 
     public Utente() {
@@ -59,6 +58,10 @@ public class Utente {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    public List<Evento> getEventi() {
+        return eventi;
     }
 
     public String getEmail() {
