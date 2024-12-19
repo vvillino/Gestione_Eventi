@@ -19,7 +19,15 @@ public class UtenteController {
     @Autowired
     private UtenteService service;
 
-    // http://localhost:8080/gestione_eventi/utenti/1
+    /*
+     * Richiesta GET per visualizzare un utente specificando il suo ID
+     * Se l'operazione riesce fornisce uno stato HTTP 200 OK, altrimenti
+     * restituisce un 404 Not Found
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/utenti/1
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Utente> getUser(@PathVariable Long id) {
 
@@ -30,7 +38,15 @@ public class UtenteController {
         }
     }
 
-    // http://localhost:8080/gestione_eventi/utenti/1
+    /*
+     * Richiesta DELETE per eliminare un utente specificando il suo ID
+     * Se l'operazione riesce fornisce uno stato HTTP 204 No Content,
+     * altrimenti restituisce un 404 Not Found
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/utenti/1
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Utente> elimina(@PathVariable Long id) {
 

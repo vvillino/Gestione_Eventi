@@ -62,6 +62,8 @@ public class Utente {
         this.cognome = cognome;
     }
 
+    // @JsonIgnore permette di escludere l'attributo da problemi di serializzazione
+    // ciclica
     @JsonIgnore
     public List<Evento> getEventi() {
         return eventi;

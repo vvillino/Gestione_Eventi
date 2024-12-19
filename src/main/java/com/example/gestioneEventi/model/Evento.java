@@ -30,6 +30,8 @@ public class Evento {
     private String categoria;
 
     @Column(name = "data")
+    // @JsonFormat permette di visualizzare la data nel formato specificato dal
+    // pattern
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
 
@@ -95,6 +97,8 @@ public class Evento {
                 + ", data=" + data + "]";
     }
 
+    // @JsonIgnore permette di escludere l'attributo da problemi di serializzazione
+    // ciclica
     @JsonIgnore
     public List<Utente> getUtenti() {
         return utenti;
