@@ -22,7 +22,18 @@ public class PartecipantiController {
     @Autowired
     private PartecipantiService partecipantiService;
 
-    // http://localhost:8080/gestione_eventi/registrazione/2/3
+    /*
+     * Richiesta POST per registrare un Utente ad un evento specifico
+     * inserendo nell'URL l'id sia dell'evento e successivamente quello
+     * dell'utente su cui effettuare l'operazione.
+     * 
+     * Se l'operazione ha successo restituisce un HTTP Status 200 OK,
+     * altrimenti restituisce un 404 Not Found
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/registrazione/2/3
+     */
     @PostMapping("/{idEvento}/{idUtente}")
     public ResponseEntity<String> registraUtente(@PathVariable Long idEvento, @PathVariable Long idUtente) {
 
@@ -33,7 +44,15 @@ public class PartecipantiController {
 
     }
 
-    // http://localhost:8080/gestione_eventi/registrazione/2/utenti
+    /*
+     * Richiesta GET per visualizzare una lista di utenti iscritti ad
+     * uno specifico evento. Se l'operazione riesce fornisce uno status
+     * HTTP 200 OK, altrimenti se la lista è vuota restituisce un 204 No Content
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/registrazione/2/utenti
+     */
     @GetMapping("/{idEvento}/utenti")
     public ResponseEntity<List<Utente>> getUtentiRegistratiByEvento(@PathVariable Long idEvento) {
 
@@ -46,7 +65,15 @@ public class PartecipantiController {
 
     }
 
-    // http://localhost:8080/gestione_eventi/registrazione/2/eventi
+    /*
+     * Richiesta GET per visualizzare una lista di eventi a cui un determinato
+     * utente si è registrato. Se l'operazione riesce fornisce uno status
+     * HTTP 200 OK, altrimenti se la lista è vuota restituisce un 204 No Content
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/registrazione/2/eventi
+     */
     @GetMapping("/{idUtente}/eventi")
     public ResponseEntity<List<Evento>> getEventiByUtente(@PathVariable Long idUtente) {
 

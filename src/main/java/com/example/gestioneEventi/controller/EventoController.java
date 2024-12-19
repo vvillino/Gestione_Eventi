@@ -27,14 +27,28 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    // http://localhost:8080/gestione_eventi/eventi
+    /*
+     * Richiesta GET per visualizzare la lista di Eventi presenti nel DB
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi
+     */
     @GetMapping
     public List<Evento> getEventi() {
 
         return eventoService.recuperaTutti();
     }
 
-    // http://localhost:8080/gestione_eventi/eventi/1
+    /*
+     * Richiesta GET per visualizzare un evento specificando il suo ID
+     * Se l'operazione riesce fornisce uno stato HTTP 200 OK, altrimenti
+     * restituisce un 404 Not Found
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi/1
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Evento> getEventiById(@PathVariable Long id) {
 
@@ -46,7 +60,15 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    // http://localhost:8080/gestione_eventi/eventi/categoria/sport
+    /*
+     * Richiesta GET per visualizzare una lista di eventi appartenente ad
+     * una specifica categoria. Se l'operazione riesce fornisce uno status
+     * HTTP 200 OK, altrimenti restituisce un 502 Bad_Gateway
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi/categoria/sport
+     */
     @GetMapping("/categoria/{categoria}")
     public ResponseEntity<List<Evento>> getEventiByCategoria(@PathVariable String categoria) {
 
@@ -58,7 +80,15 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
     }
 
-    // http://localhost:8080/gestione_eventi/eventi/data/2024-03-10
+    /*
+     * Richiesta GET per visualizzare una lista di eventi risalenti ad
+     * una specifica data. Se l'operazione riesce fornisce uno status
+     * HTTP 200 OK, altrimenti restituisce un 502 Bad_Gateway
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi/data/2024-05-12
+     */
     @GetMapping("/data/{data}")
     public ResponseEntity<List<Evento>> getEventiByData(@PathVariable LocalDate data) {
 
@@ -70,7 +100,18 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
     }
 
-    // http://localhost:8080/gestione_eventi/eventi/crea
+    /*
+     * Richiesta POST per creare un Evento e salvarlo nel Database.
+     * Se l'operazione riesce fornisce uno status HTTP 201 Created,
+     * altrimenti restituisce un 500 Internal_Server_Error
+     * 
+     * Il @Valid permette di verificare se gli attributi nell'oggetto
+     * Evento siano validi
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi/crea
+     */
     @PostMapping("/crea")
     public ResponseEntity<Evento> creaEvento(@RequestBody @Valid Evento evento) {
 
@@ -80,7 +121,15 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
-    // http://localhost:8080/gestione_eventi/eventi/8
+    /*
+     * Richiesta PUT per aggiornare un Evento e salvarlo nel Database.
+     * Se l'operazione riesce fornisce uno status HTTP 200 OK,
+     * altrimenti restituisce un 404 Not_Found
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi/8
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Evento> modificaEvento(@PathVariable Long id, @RequestBody @Valid Evento evento) {
 
@@ -95,7 +144,15 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    // http://localhost:8080/gestione_eventi/eventi/8
+    /*
+     * Richiesta DELETE per eliminare un evento specificando il suo ID
+     * Se l'operazione riesce fornisce uno stato HTTP 204 No Content,
+     * altrimenti restituisce un 404 Not Found
+     * 
+     * Link d'esempio per la rotta:
+     * 
+     * http://localhost:8080/gestione_eventi/eventi/8
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Evento> elimina(@PathVariable Long id) {
 
