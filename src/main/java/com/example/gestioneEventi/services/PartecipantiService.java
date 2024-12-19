@@ -1,5 +1,6 @@
 package com.example.gestioneEventi.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,28 @@ public class PartecipantiService {
 
         return false;
 
+    }
+
+    public List<Utente> getUtentyByEvento(Long idEvento) {
+
+        Optional<Evento> eventoDB = eventoRepo.findById(idEvento);
+        Evento evento = eventoDB.get();
+
+        if (evento == null)
+            return null;
+
+        return evento.getUtenti();
+    }
+
+    public List<Evento> getEventiByUtente(Long idUtente) {
+
+        Optional<Utente> utenteDB = utenteRepo.findById(idUtente);
+        Utente utente = utenteDB.get();
+
+        if (utente == null)
+            return null;
+
+        return utente.getEventi();
     }
 
 }

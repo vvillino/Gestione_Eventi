@@ -2,6 +2,8 @@ package com.example.gestioneEventi.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -60,6 +62,7 @@ public class Utente {
         this.cognome = cognome;
     }
 
+    @JsonIgnore
     public List<Evento> getEventi() {
         return eventi;
     }
